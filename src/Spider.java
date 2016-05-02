@@ -2,13 +2,17 @@ import java.awt.TextArea;
 import java.util.*;
 
 public class Spider {
-	private static final int MAX_PAGES_TO_SEARCH = 100;
+	private int MaxPageSearch = 100;
 	private Set<String> pagesVisited = new HashSet<String>();
 	private List<String> pagesToVisit = new LinkedList<String>();
 	private List<PageFound> pagesFoundList = new LinkedList<PageFound>();
 	private ArrayList<Integer> n = new ArrayList<>();
 	private ArrayList<Double> length = new ArrayList<>();
 	private ArrayList<PageFound> resultPage = new ArrayList<PageFound>();
+	
+	public Spider(int maxPageSearch) {
+		this.MaxPageSearch = maxPageSearch;
+	}
 
 	private String nextUrl() {
 		String nextUrl;
@@ -22,7 +26,7 @@ public class Spider {
 
 	public void search(String url, String query) {
 		int i = 1;
-		while (this.pagesVisited.size() < MAX_PAGES_TO_SEARCH) {
+		while (this.pagesVisited.size() < MaxPageSearch) {
 			System.out.println("\n#### Page " + i + " ####");
 			String currentUrl;
 			SpiderLeg leg = new SpiderLeg();
@@ -31,7 +35,7 @@ public class Spider {
 			} else {
 				currentUrl = this.nextUrl();
 			}
-			
+	
 			boolean isSuccess = false;
 			if(leg.crawl(currentUrl)){
 				isSuccess = leg.searchForWord(query);
@@ -104,7 +108,7 @@ public class Spider {
 		for (PageFound page : pagesFoundList) {
 			for (int i = 0; i < page.pageWord.size(); i++) {
 				double nTemp = ((double) n.get(i));
-				double IDF = Math.log10(MAX_PAGES_TO_SEARCH / nTemp);
+				double IDF = Math.log10(MaxPageSearch / nTemp);
 
 				double TF = page.pageWord.get(i).getAmountWord();
 

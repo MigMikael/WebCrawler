@@ -29,6 +29,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.SwingConstants;
 
 public class CrawlerGUI {
 
@@ -45,6 +46,7 @@ public class CrawlerGUI {
 	public JLabel bg1;
 	
 	public Spider spider;
+	private JTextField inputMaxPageSearch;
 
 	/**
 	 * Launch the application.
@@ -95,10 +97,11 @@ public class CrawlerGUI {
 		labelUrl = new JLabel("Input URL you want to search :");
 		labelUrl.setForeground(Color.DARK_GRAY);
 		labelUrl.setFont(new Font("Angsana New", Font.BOLD, 32));
-		labelUrl.setBounds(377, 48, 311, 29);
+		labelUrl.setBounds(336, 49, 311, 29);
 		frame.getContentPane().add(labelUrl);
 		
 		inputUrl = new JTextField();
+		inputUrl.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		inputUrl.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				inputUrl.setText("");
@@ -111,10 +114,11 @@ public class CrawlerGUI {
 		labelQuery = new JLabel("Input Search Word :");
 		labelQuery.setForeground(Color.DARK_GRAY);
 		labelQuery.setFont(new Font("Angsana New", Font.BOLD, 32));
-		labelQuery.setBounds(416, 118, 188, 29);
+		labelQuery.setBounds(336, 117, 188, 29);
 		frame.getContentPane().add(labelQuery);
 		
 		inputQuery = new JTextField();
+		inputQuery.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		inputQuery.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				inputQuery.setText("");
@@ -123,6 +127,20 @@ public class CrawlerGUI {
 		inputQuery.setBounds(336, 153, 341, 29);
 		frame.getContentPane().add(inputQuery);
 		inputQuery.setColumns(10);
+		
+		JLabel lblMaxPageSearch = new JLabel("Max Page Search :");
+		lblMaxPageSearch.setForeground(Color.DARK_GRAY);
+		lblMaxPageSearch.setFont(new Font("Angsana New", Font.BOLD, 30));
+		lblMaxPageSearch.setBounds(336, 181, 188, 29);
+		frame.getContentPane().add(lblMaxPageSearch);
+		
+		inputMaxPageSearch = new JTextField();
+		inputMaxPageSearch.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		inputMaxPageSearch.setText("100");
+		inputMaxPageSearch.setHorizontalAlignment(SwingConstants.CENTER);
+		inputMaxPageSearch.setBounds(336, 209, 188, 29);
+		frame.getContentPane().add(inputMaxPageSearch);
+		inputMaxPageSearch.setColumns(10);
 		
 		buttonGo = new JLabel("");
 		buttonGo.setIcon(new ImageIcon("C:\\Users\\Mig\\Desktop\\go3.png"));
@@ -135,7 +153,9 @@ public class CrawlerGUI {
 				String url = inputUrl.getText();
 				String query = inputQuery.getText();
 				
-				spider = new Spider();
+				int maxPageSearch = Integer.parseInt(inputMaxPageSearch.getText());
+				spider = new Spider(maxPageSearch);
+				query = query.toLowerCase();
 				spider.search(url, query);
 				
 				spider.countPageFound(query);

@@ -11,7 +11,7 @@ public class SpiderTest {
 		System.out.print("Input Search Word :");
 		String query = in.nextLine();
 
-		Spider spider = new Spider();
+		Spider spider = new Spider(100);
 		spider.search(url, query);
 
 		System.out.println("---------------------------------------------------");
