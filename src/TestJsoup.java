@@ -23,8 +23,10 @@ public class TestJsoup {
 		double d2 = 11.50;
 		
 		int reval = Double.compare(d1, d2);
-		System.out.print(reval);
+		System.out.println(reval);
 		
+		String temp = "This is the best ubuntu in history and also server";
+		System.out.println(temp.contains("ubuntu server"));
 		/*
 		String largeText = "asdfasdfasdfasdfasdfasdfasdfas";
 		int count = StringUtils.countMatches(largeText, "as");

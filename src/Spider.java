@@ -84,7 +84,7 @@ public class Spider {
 					count++;
 				}
 			}
-			Integer temp = new Integer(count);
+			Integer temp = new Integer(count - 1);
 			n.add(temp);
 		}
 	}
@@ -109,7 +109,7 @@ public class Spider {
 			for (int i = 0; i < page.pageWord.size(); i++) {
 				double nTemp = ((double) n.get(i));
 				double IDF = Math.log10(MaxPageSearch / nTemp);
-
+				System.out.println("@@@@ page >>>> "+ IDF+" | n >>>> "+n.get(i));
 				double TF = page.pageWord.get(i).getAmountWord();
 
 				page.pageWord.get(i).setAmountWord(TF * IDF);
